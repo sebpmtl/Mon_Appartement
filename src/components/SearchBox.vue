@@ -31,24 +31,35 @@ export default {
     }
   },
   
-  mounted(){
+mounted(){
    
-  
+  parseCSV: {
    const url = '../../static/logements-sociaux20170822.csv';
-
-   var parsed = Papa.parse(url,{
+   var self = this;
+       Papa.parse(url,{
        download: true,
        header: true,
        
-       complete: function(results, file) {
-      console.log("Parsing complete:", results.data);
+       error: function(){
 
-         }
+         console.log("Couldn't parse file!")
+
+    },
+
+       complete: function(results, file) {
        
+       console.log("File parsed!")
+       /*results.data[0]['Nom Projet']*/
+         self.arrondissements.push(results.data[0].Numéro);
+         
+       
+       }
   })
- 
+  }
        
-}
+  }
+ 
+
 }
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" dark>
+  <v-app dark>
     <v-navigation-drawer
       persistent
       v-model="drawer"
