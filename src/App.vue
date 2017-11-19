@@ -34,11 +34,12 @@
     <main>
       <v-content>
         <v-container fill-height>
-          <v-layout justify-center align-center >
-                
-            <router-view></router-view>
+          <v-layout justify-center align-center row wrap>      
+            <router-view name="search"></router-view>   
+             <router-view name="results"></router-view>
           </v-layout>
         </v-container>
+
       </v-content>
     </main>
     <v-footer app>
@@ -56,7 +57,10 @@
     }),
     props: {
       source: String
-    }
+    },
+    mounted: function () {
+    this.$store.dispatch('LOAD_PROJECT_LIST')
+  }
   }
 </script>
    
@@ -64,7 +68,5 @@
 
 
 <style>
-.selects{
 
-}
 </style>
