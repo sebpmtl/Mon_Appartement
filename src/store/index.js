@@ -8,7 +8,9 @@ const store = new Vuex.Store({
       projects:[],
       e7: [],
       page:1,
-      size: 350
+      size: 200,
+      pageNumber: 0
+  
   },
   actions: {
     LOAD_PROJECT_LIST: function ({ commit }) {
@@ -43,6 +45,7 @@ const store = new Vuex.Store({
   paginated: (state, filteredProjects) =>{
      const index = (state.page -1) * state.size
      const paginate = store.getters.filteredProjects.slice(index,index + state.size)
+     state.pageNumber = Math.ceil(store.getters.filteredProjects.length / state.size)
      return paginate
   }
 }
