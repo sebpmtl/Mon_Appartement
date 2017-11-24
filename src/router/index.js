@@ -13,6 +13,9 @@ export default new Router({
       components:{
         search: SearchBox,
         results: SearchResults
+
+       
+       
       } 
     }
   ]

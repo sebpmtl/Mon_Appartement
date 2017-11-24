@@ -1,8 +1,8 @@
 <template>
 <v-flex xs9>
 <v-list three-line>
-            <template v-for="item in filteredProjects">
-              <v-list-tile>
+            <template v-for="item in paginated">
+              <v-list-tile :key="item.id">
                 <v-flex xs6>
                <v-list-tile-content>
                   <v-list-tile-title v-html="item['Nom Projet']"></v-list-tile-title>
@@ -16,6 +16,10 @@
               </v-list-tile>
             </template>
           </v-list>
+
+           <div class="text-xs-center">
+      <v-pagination :length="6" v-model="page"></v-pagination>
+    </div>
 </v-flex>
 </template>
 
@@ -26,14 +30,32 @@ import { mapGetters } from 'vuex'
 
 export default {
     name: "SearchResults",
+    data: () => ({
+      
+    }),
     computed: {
      
    ...mapGetters([
 
-          'filteredProjects'
-   ])
+          'filteredProjects',
+          'paginated'
 
+   ]),
   
+    page: {
+     get () {
+      return this.$store.state.page
+    },
+    set (value) {
+      this.$store.commit('updatePage', value)
+    }
+  }
     }
 }
 </script>
+
+<style scoped>
+
+
+
+</style>
