@@ -29,6 +29,7 @@ const store = new Vuex.Store({
       },
       updateE7: (state,e7)=> {
         state.e7 = e7
+        state.page = 1
       },
       updatePage: (state,page)=> {
         state.page = page
@@ -40,7 +41,7 @@ const store = new Vuex.Store({
     filteredProjects: state => {
         return state.projects.filter(project => 
           state.e7.length !== 0 ? project['Type_projet'].includes(state.e7) : project ) 
-  
+        
   },
   paginated: (state, filteredProjects) =>{
      const index = (state.page -1) * state.size

@@ -18,7 +18,7 @@
                 v-model="e7"
                 chips
                 hint="Choisir un ou plusieurs choix"
-                persistent-hint              
+                persistent-hint          
               ></v-select>
             </v-flex>
             
