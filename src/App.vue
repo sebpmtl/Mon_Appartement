@@ -38,23 +38,42 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer app fixed>
-      <span>&copy; 2017</span>
+    <v-footer app fixed style="justify-content:center">
+       <div class="text-xs-center">
+      <v-pagination :length="pageNumber" v-model="page"></v-pagination>
+    </div>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+
   export default {
     name: 'app',
     data: () => ({
-      drawer: true
+      drawer: false
     }),
     props: {
       source: String
     },
     mounted: function () {
     this.$store.dispatch('LOAD_PROJECT_LIST')
+  },
+   computed: {
+      ...mapState([
+          'pageNumber'
+      ]),
+  
+    page: {
+     get () {
+      return this.$store.state.page
+    },
+    set (value) {
+      this.$store.commit('updatePage', value)
+    }
+  }
   }
   }
 </script>

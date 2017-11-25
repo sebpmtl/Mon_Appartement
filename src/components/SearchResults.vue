@@ -17,9 +17,7 @@
             </template>
           </v-list>
 
-           <div class="text-xs-center">
-      <v-pagination :length="pageNumber" v-model="page"></v-pagination>
-    </div>
+          
 </v-flex>
 </template>
 
@@ -34,26 +32,14 @@ export default {
       
     }),
     computed: {
-      ...mapState([
-          'pageNumber'
-      ]),
      
    ...mapGetters([
 
-          'filteredProjects',
+          
           'paginated'
 
-   ]),
-  
-    page: {
-     get () {
-      return this.$store.state.page
-    },
-    set (value) {
-      this.$store.commit('updatePage', value)
+   ])
     }
-  }
-}
 }
 </script>
 
