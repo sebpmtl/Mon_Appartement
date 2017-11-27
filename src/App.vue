@@ -32,9 +32,8 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-center row wrap>
-          <router-view name="search"></router-view>
-         <router-view name="results"></router-view>
-         
+          <search-box></search-box>
+         <router-view></router-view>
         </v-layout>
       </v-container>
     </v-content>
@@ -49,9 +48,15 @@
 <script>
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
+import SearchBox from '@/components/SearchBox'
 
   export default {
     name: 'app',
+    components: {
+
+      SearchBox
+      
+      },
     data: () => ({
       drawer: false
     }),
@@ -59,7 +64,7 @@ import { mapGetters } from 'vuex'
       source: String
     },
     mounted: function () {
-    this.$store.dispatch('LOAD_PROJECT_LIST')
+    this.$store.cache.dispatch('LOAD_PROJECT_LIST')
   },
    computed: {
       ...mapState([

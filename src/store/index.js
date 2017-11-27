@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import vuexCache from 'vuex-cache'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
       pageNumber: 0
   
   },
+  plugins:[vuexCache],
   actions: {
     LOAD_PROJECT_LIST: function ({ commit }) {
         axios.get('../static/logements.1.json').then((response) => {
