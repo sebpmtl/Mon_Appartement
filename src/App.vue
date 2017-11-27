@@ -55,7 +55,7 @@ import SearchBox from '@/components/SearchBox'
     components: {
 
       SearchBox
-      
+
       },
     data: () => ({
       drawer: false
@@ -77,8 +77,14 @@ import SearchBox from '@/components/SearchBox'
     },
     set (value) {
       this.$store.commit('updatePage', value)
+    
     }
   }
+  },
+  methods:{
+    back(){
+      return console.log("hey")
+    }
   }
   }
 </script>

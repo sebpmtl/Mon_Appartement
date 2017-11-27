@@ -46,6 +46,11 @@ const store = new Vuex.Store({
         
   },
   paginated: (state, filteredProjects) =>{
+    window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'instant' 
+    });
      const index = (state.page -1) * state.size
      const paginate = store.getters.filteredProjects.slice(index,index + state.size)
      state.pageNumber = Math.ceil(store.getters.filteredProjects.length / state.size)
