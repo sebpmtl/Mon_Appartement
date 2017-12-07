@@ -41,23 +41,26 @@ const store = new Vuex.Store({
 
   getters: {
     filteredProjects: state => {
-        return state.projects.filter(project => 
-          state.e7.length !== 0 ? project['Type_projet'].includes(state.e7) : project ) 
-        
-  },
-  paginated: (state, filteredProjects) =>{
-    window.scroll({
-      top: 0, 
-      left: 0, 
-      behavior: 'instant' 
-    });
-     const index = (state.page -1) * state.size
-     const paginate = store.getters.filteredProjects.slice(index,index + state.size)
-     state.pageNumber = Math.ceil(store.getters.filteredProjects.length / state.size)
-     return paginate
+      return state.projects.filter(project =>
+        state.e7.length !== 0 ? project['Type_projet'].includes(state.e7) : project)
+
+    },
+    deDuped: state =>{
+      return state.projects.reduce((x,y) => x.findIndex(e => e['Nom Projet']== y['Nom Projet']) < 0? [...x,y]:x,[])
+    },
+    paginated: (state, filteredProjects) => {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+      });
+      const index = (state.page - 1) * state.size
+      const paginate = store.getters.filteredProjects.slice(index, index + state.size)
+      state.pageNumber = Math.ceil(store.getters.filteredProjects.length / state.size)
+      return paginate
+    }
   }
-}
- 
+
 })
 
 export default store
