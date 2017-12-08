@@ -3,7 +3,7 @@
 <v-list two-line>
             <template v-for="item in paginated">
               
-              <v-list-tile >
+              <v-list-tile :key="paginated.indexOf(item)">
                 <v-flex xs4>
                   
                <v-list-tile-content>
@@ -28,7 +28,7 @@
                 <v-flex xs2>
                   <v-list-tile-content >
                   <v-list-tile-sub-title v-html="'programme: ' + item['Type_programme']"></v-list-tile-sub-title>
-                 <v-list-tile-sub-title v-html="paginated.indexOf(item['Type_programme'])"></v-list-tile-sub-title>
+                 <v-list-tile-sub-title v-html=""></v-list-tile-sub-title>
                 
                   </v-list-tile-content>
                 </v-flex>

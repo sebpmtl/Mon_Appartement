@@ -6,47 +6,52 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-      projects:[],
-      e7: [],
-      page:1,
-      size: 200,
-      pageNumber: 0
-  
+    projects: [],
+    e7: [],
+    e6: [],
+    page: 1,
+    size: 200,
+    pageNumber: 0
+
   },
-  plugins:[vuexCache],
+  plugins: [vuexCache],
   actions: {
     LOAD_PROJECT_LIST: function ({ commit }) {
-        axios.get('../static/logements.1.json').then((response) => {
-          commit('SET_PROJECT_LIST', { list: response.data })
-        }, (err) => {
-          console.log(err)
-        })
-      }
+      axios.get('../static/logements.1.json').then((response) => {
+        commit('SET_PROJECT_LIST', { list: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    }
   },
   /* The mutations calls are the only place that the store can be updated.*/
 
   mutations: {
     SET_PROJECT_LIST: (state, { list }) => {
-        state.projects = list
-      },
-      updateE7: (state,e7)=> {
-        state.e7 = e7
-        state.page = 1
-      },
-      updatePage: (state,page)=> {
-        state.page = page
-      }
+      state.projects = list
+    },
+    updateE7: (state, e7) => {
+      state.e7 = e7
+      state.page = 1
+    },
+    updateE6: (state, e6) => {
+      state.e6 = e6
+    },
+    updatePage: (state, page) => {
+      state.page = page
+    }
   },
   /* use with computed */
 
   getters: {
     filteredProjects: state => {
       return state.projects.filter(project =>
-        state.e7.length !== 0 ? project['Type_projet'].includes(state.e7) : project)
+        (state.e7.length !== 0 || state.e7.includes('tous')) ? project['Type_projet'].includes(state.e7) && (project['Arrondissement'].includes(state.e6)|| project['Nom_Villes_liées'].includes(state.e6) )  : project)
 
     },
-    deDuped: state =>{
-      return state.projects.reduce((x,y) => x.findIndex(e => e['Nom Projet']== y['Nom Projet']) < 0? [...x,y]:x,[])
+
+    deDuped: state => {
+      return state.projects.reduce((x, y) => x.findIndex(e => e['Nom Projet'] == y['Nom Projet']) < 0 ? [...x, y] : x, [])
     },
     paginated: (state, filteredProjects) => {
       window.scroll({
