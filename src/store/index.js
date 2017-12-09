@@ -7,7 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     projects: [],
-    e7: [],
+    e7: ['tous'],
     e6: [],
     page: 1,
     size: 200,
@@ -46,7 +46,7 @@ const store = new Vuex.Store({
   getters: {
     filteredProjects: state => {
       return state.projects.filter(project =>
-        (state.e7.length !== 0 || state.e7.includes('tous')) ? project['Type_projet'].includes(state.e7) && (project['Arrondissement'].includes(state.e6)|| project['Nom_Villes_liées'].includes(state.e6) )  : project)
+        !state.e7.includes('tous')  ? project['Type_projet'].includes(state.e7) && (project['Arrondissement'].includes(state.e6)|| project['Nom_Villes_liées'].includes(state.e6) )  : project)
 
     },
 

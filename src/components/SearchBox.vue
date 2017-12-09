@@ -42,9 +42,7 @@
             :items="arrondissements.concat(villes)"
             v-model="e6"
             chips
-            hint=""
             persistent-hint
-            
           ></v-select>
         </v-flex>
           </v-layout>
