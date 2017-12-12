@@ -45,6 +45,7 @@ const store = new Vuex.Store({
 
   getters: {
     filteredProjects: state => {
+      console.count()
       return state.projects.filter(project =>
         !state.e7.includes('tous')  ? project['Type_projet'].includes(state.e7) && (project['Arrondissement'].includes(state.e6)|| project['Nom_Villes_liées'].includes(state.e6) )  : project)
 

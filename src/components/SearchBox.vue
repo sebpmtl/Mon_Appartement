@@ -38,11 +38,13 @@
             </v-flex>
               <v-flex xs12 sm6>
           <v-select
+          class="drop"
             label="Arrondissements/Villes Liées"
             :items="arrondissements.concat(villes)"
             v-model="e6"
             chips
             persistent-hint
+            clearable
           ></v-select>
         </v-flex>
           </v-layout>
@@ -60,7 +62,6 @@ export default {
   name: "SearchBox",
   data(){
     return {
-      type: ['Coop','HLM','OBNL','SHDM'],
       a1:[],
       search: null,
       villes:["Baie-D'Urfé","Beaconsfield","Côte-Saint-Luc", "Dollard-des-Ormeaux","Dorval" ,"Hampstead", "Kirkland", "Montréal-Est", "Montréal-Ouest", "Mont Royal", "Pointe-Claire", "Sainte-Anne-de-Bellevue", "Senneville" ,"Westmount"],
@@ -112,4 +113,5 @@ export default {
   width: 600px;
   height: 190px;
 }
+
 </style>

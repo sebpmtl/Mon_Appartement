@@ -81,11 +81,8 @@ import SearchBox from '@/components/SearchBox'
     }
   }
   },
-  methods:{
-    back(){
-      return console.log("hey")
-    }
-  }
+  
+  
   }
 </script>
    
