@@ -21,14 +21,14 @@
                 <v-flex xs2>
                   <v-list-tile-content>
                   <v-list-tile-sub-title v-html="item['Nb_Logements']+' logements'"></v-list-tile-sub-title>
-                 <v-list-tile-sub-title v-html=""></v-list-tile-sub-title>
+                 <v-list-tile-sub-title></v-list-tile-sub-title>
                 
                   </v-list-tile-content>
                 </v-flex>
                 <v-flex xs2>
                   <v-list-tile-content >
                   <v-list-tile-sub-title v-html="'programme: ' + item['Type_programme']"></v-list-tile-sub-title>
-                 <v-list-tile-sub-title v-html=""></v-list-tile-sub-title>
+                 <v-list-tile-sub-title></v-list-tile-sub-title>
                 
                   </v-list-tile-content>
                 </v-flex>

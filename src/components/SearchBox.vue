@@ -44,7 +44,6 @@
             v-model="e6"
             chips
             persistent-hint
-            clearable
           ></v-select>
         </v-flex>
           </v-layout>

@@ -7,7 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     projects: [],
-    e7: ['tous'],
+    e7: '',
     e6: [],
     page: 1,
     size: 200,
@@ -24,7 +24,7 @@ const store = new Vuex.Store({
       })
     }
   },
-  /* The mutations calls are the only place that the store can be updated.*/
+  /* The mutations calls are the only place that the store can be updated. */
 
   mutations: {
     SET_PROJECT_LIST: (state, { list }) => {
@@ -47,19 +47,21 @@ const store = new Vuex.Store({
     filteredProjects: state => {
       console.count()
       return state.projects.filter(project =>
-        !state.e7.includes('tous')  ? project['Type_projet'].includes(state.e7) && (project['Arrondissement'].includes(state.e6)|| project['Nom_Villes_liées'].includes(state.e6) )  : project)
-
+        !state.e7.includes() ? project['Type_projet']
+          .includes(state.e7) && (project['Arrondissement']
+          .includes(state.e6) || project['Nom_Villes_liées']
+            .includes(state.e6)) : project)
     },
 
     deDuped: state => {
-      return state.projects.reduce((x, y) => x.findIndex(e => e['Nom Projet'] == y['Nom Projet']) < 0 ? [...x, y] : x, [])
+      return state.projects.reduce((x, y) => x.findIndex(e => e['Nom Projet'] === y['Nom Projet']) < 0 ? [...x, y] : x, [])
     },
     paginated: (state, filteredProjects) => {
       window.scroll({
         top: 0,
         left: 0,
         behavior: 'instant'
-      });
+      })
       const index = (state.page - 1) * state.size
       const paginate = store.getters.filteredProjects.slice(index, index + state.size)
       state.pageNumber = Math.ceil(store.getters.filteredProjects.length / state.size)
