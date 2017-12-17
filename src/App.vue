@@ -30,8 +30,8 @@
       <v-toolbar-title>Mon Appartement</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center row wrap>
+      <v-container fluid>
+        <v-layout justify-center row wrap>
           <search-box></search-box>
          <router-view></router-view>
         </v-layout>
@@ -47,43 +47,40 @@
 
 <script>
 import { mapState } from 'vuex'
-import { mapGetters } from 'vuex'
 import SearchBox from '@/components/SearchBox'
 
-  export default {
-    name: 'app',
-    components: {
+export default {
+  name: 'app',
+  components: {
 
-      SearchBox
+    SearchBox
 
-      },
-    data: () => ({
-      drawer: false
-    }),
-    props: {
-      source: String
-    },
-    mounted: function () {
+  },
+  data: () => ({
+    drawer: false
+  }),
+  props: {
+    source: String
+  },
+  mounted: function () {
     this.$store.cache.dispatch('LOAD_PROJECT_LIST')
   },
-   computed: {
-      ...mapState([
-          'pageNumber'
-      ]),
-  
+  computed: {
+    ...mapState([
+      'pageNumber'
+    ]),
+
     page: {
-     get () {
-      return this.$store.state.page
-    },
-    set (value) {
-      this.$store.commit('updatePage', value)
-    
+      get () {
+        return this.$store.state.page
+      },
+      set (value) {
+        this.$store.commit('updatePage', value)
+      }
     }
   }
-  },
-  
-  
-  }
+
+}
 </script>
    
 

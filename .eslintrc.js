@@ -6,6 +6,7 @@ module.exports = {
     },
     env: {
       browser: true,
+      es6: true
     },
     plugins: [
         "html"
@@ -16,8 +17,13 @@ module.exports = {
       "indent": ["error",2],
       "no-tabs": 0,
       "no-unneeded-ternary":"error",
-      "no-nested-ternary":"error"
-    }
+      "no-nested-ternary":"error",
+      "prefer-const": ["error", {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": true,   
+    }],
+   
+  }
    },
    {
     enforce: "pre",

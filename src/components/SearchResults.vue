@@ -1,9 +1,8 @@
 <template>
-<v-flex xs9>
-<v-list two-line>
-            <template v-for="item in paginated">
-              
-              <v-list-tile :key="paginated.indexOf(item)">
+<v-flex s12 md9>
+<v-list two-line v-if="paginated.length > 0">
+            <template  v-for="(item,index) in paginated">
+              <v-list-tile :key="index"  >
                 <v-flex xs4>
                   
                <v-list-tile-content>
@@ -34,28 +33,41 @@
                 </v-flex>
 
               </v-list-tile>
-                 <v-divider></v-divider>
+                 <v-divider :key="index"></v-divider>
+                 
             </template>
+            
           </v-list>
-
-          
+<v-list v-else>
+  <template>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>
+          <h2 id="no-results">Aucuns Résultats</h2>
+          </v-list-tile-title>
+          </v-list-tile-content>
+          </v-list-tile>
+          </template>
+          </v-list>         
 </v-flex>
 </template>
 
 
 <script>
-import { mapState } from "vuex";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 
 export default {
-  name: "SearchResults",
+  name: 'SearchResults',
   data: () => ({}),
   computed: {
-    ...mapGetters(["paginated"])
+    ...mapGetters(['paginated'])
   }
-};
+}
 </script>
 
 <style scoped>
+#no-results {
+  font-style: oblique;
+}
 
 </style>

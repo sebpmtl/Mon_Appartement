@@ -44,6 +44,7 @@
             v-model="e6"
             chips
             persistent-hint
+            clearable
           ></v-select>
         </v-flex>
           </v-layout>
@@ -54,50 +55,76 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { mapGetters} from 'vuex'
- 
+import { mapState, mapGetters } from 'vuex'
+
 export default {
-  name: "SearchBox",
-  data(){
+  name: 'SearchBox',
+  data () {
     return {
-      a1:[],
+      a1: [],
       search: null,
-      villes:["Baie-D'Urfé","Beaconsfield","Côte-Saint-Luc", "Dollard-des-Ormeaux","Dorval" ,"Hampstead", "Kirkland", "Montréal-Est", "Montréal-Ouest", "Mont Royal", "Pointe-Claire", "Sainte-Anne-de-Bellevue", "Senneville" ,"Westmount"],
-      arrondissements:["Ahuntsic-Cartierville","Anjou","Côte-des-Neiges-Notre-Dame-de-Grâce","Lachine","LaSalle","Le Plateau-Mont-Royal","Le Sud-Ouest","L'île-Bizard-Sainte-Geneviève","Mercier-Hochelaga-Maisonneuve","Montréal-Nord","Outremont","Pierrefonds-Roxboro","Rivière-des-Prairies-Pointe-aux-Trembles","Rosemont-La Petite-Patrie","Saint-Laurent","Saint-Léonard","Verdun","Ville-Marie","Villeray-Saint-Michel-Parc-Extension" ]
+      villes: [
+        "Baie-D'Urfé",
+        'Beaconsfield',
+        'Côte-Saint-Luc',
+        'Dollard-des-Ormeaux',
+        'Dorval',
+        'Hampstead',
+        'Kirkland',
+        'Montréal-Est',
+        'Montréal-Ouest',
+        'Mont Royal',
+        'Pointe-Claire',
+        'Sainte-Anne-de-Bellevue',
+        'Senneville',
+        'Westmount'
+      ],
+      arrondissements: [
+        'Ahuntsic-Cartierville',
+        'Anjou',
+        'Côte-des-Neiges–Notre-Dame-de-Grâce',
+        'Lachine',
+        'LaSalle',
+        'Le Plateau-Mont-Royal',
+        'Le Sud-Ouest',
+        "L'île-Bizard-Sainte-Geneviève",
+        'Mercier-Hochelaga-Maisonneuve',
+        'Montréal-Nord',
+        'Outremont',
+        'Pierrefonds-Roxboro',
+        'Rivière-des-Prairies-Pointe-aux-Trembles',
+        'Rosemont-La Petite-Patrie',
+        'Saint-Laurent',
+        'Saint-Léonard',
+        'Verdun',
+        'Ville-Marie',
+        'Villeray-Saint-Michel-Parc-Extension'
+      ]
     }
   },
-  computed:{ ...mapState([
-    'projects'
-  ]),
+  computed: {
+    ...mapState(['projects']),
 
-  ...mapGetters([
+    ...mapGetters(['deDuped']),
 
-    'deDuped'
-  ]),
-  
-
-  e7: {
-     get () {
-      return this.$store.state.e7
+    e7: {
+      get () {
+        return this.$store.state.e7
+      },
+      set (value) {
+        this.$store.commit('updateE7', value)
+      }
     },
-    set (value) {
-      this.$store.commit('updateE7', value)
-    }
-  },
-  e6: {
-     get () {
-      return this.$store.state.e6
-    },
-    set (value) {
-      this.$store.commit('updateE6', value)
+    e6: {
+      get () {
+        return this.$store.state.e6
+      },
+      set (value) {
+        this.$store.commit('updateE6', value)
+      }
     }
   }
-
-  }
-  
-
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -108,9 +135,8 @@ export default {
   padding: 0px;
 }
 
-.card {
+#search{
   width: 600px;
-  height: 190px;
+  height: 190px!important;
 }
-
 </style>

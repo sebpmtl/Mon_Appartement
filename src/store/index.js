@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 import vuexCache from 'vuex-cache'
+import * as logements from '../../data/logements.1.json'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     projects: [],
     e7: '',
-    e6: [],
+    e6: '',
     page: 1,
     size: 200,
     pageNumber: 0
@@ -17,11 +17,7 @@ const store = new Vuex.Store({
   plugins: [vuexCache],
   actions: {
     LOAD_PROJECT_LIST: function ({ commit }) {
-      axios.get('../static/logements.1.json').then((response) => {
-        commit('SET_PROJECT_LIST', { list: response.data })
-      }, (err) => {
-        console.log(err)
-      })
+      commit('SET_PROJECT_LIST', {list: logements})
     }
   },
   /* The mutations calls are the only place that the store can be updated. */
@@ -41,16 +37,20 @@ const store = new Vuex.Store({
       state.page = page
     }
   },
-  /* use with computed */
+  /** TODO: default params
+   *
+   * @returns {Array.<objects>}
+   */
 
   getters: {
     filteredProjects: state => {
       console.count()
       return state.projects.filter(project =>
-        !state.e7.includes() ? project['Type_projet']
-          .includes(state.e7) && (project['Arrondissement']
-          .includes(state.e6) || project['Nom_Villes_liées']
-            .includes(state.e6)) : project)
+        state.e6 !== null
+          ? project['Type_projet']
+            .includes(state.e7) && (project['Arrondissement'] || project['Nom_Villes_liées'])
+            .includes(state.e6) : project['Type_projet']
+            .includes(state.e7))
     },
 
     deDuped: state => {
