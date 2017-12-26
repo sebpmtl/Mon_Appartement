@@ -1,24 +1,9 @@
 <template>
-  <v-card flat id="search">
-      <v-card-text>
         <v-container>
-          <v-layout  row wrap>
-            <v-flex>
-              <v-select
-                :items="deDuped"
-                v-model="a1"
-                label="Recherche"
-                autocomplete
-                cache-items
-                clearable
-                item-text="Nom Projet"   
-              
-              ></v-select>
-            </v-flex>
-          </v-layout>
-            <v-layout row>
-            <v-flex class="py-2">
-              <v-btn-toggle  v-model="e7">
+            <v-layout row wrap>
+           <v-flex xs5>
+              <v-btn-toggle  v-model="projectType" class="types">
+  
                 <v-btn color="red" flat value="">
                   Tous
                 </v-btn>
@@ -34,28 +19,26 @@
                 <v-btn color="amber lighten-2" flat value="SHDM">
                   SHDM
                 </v-btn>
+                 
               </v-btn-toggle>
-            </v-flex>
-              <v-flex xs12 sm6>
-          <v-select
+           </v-flex>
+            <v-flex xs4>
+          <v-select 
           class="drop"
             label="Arrondissements/Villes Liées"
             :items="arrondissements.concat(villes)"
-            v-model="e6"
+            v-model="projectArea"
             chips
             persistent-hint
             clearable
           ></v-select>
-        </v-flex>
+        </v-flex> 
           </v-layout>
         </v-container>
-      </v-card-text>
-    </v-card>
-  
+   
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'SearchBox',
@@ -103,24 +86,21 @@ export default {
     }
   },
   computed: {
-    ...mapState(['projects']),
 
-    ...mapGetters(['deDuped']),
-
-    e7: {
+    projectType: {
       get () {
-        return this.$store.state.e7
+        return this.$store.state.projectType
       },
       set (value) {
-        this.$store.commit('updateE7', value)
+        this.$store.commit('updateType', value)
       }
     },
-    e6: {
+    projectArea: {
       get () {
-        return this.$store.state.e6
+        return this.$store.state.projectArea
       },
       set (value) {
-        this.$store.commit('updateE6', value)
+        this.$store.commit('updateArea', value)
       }
     }
   }
@@ -131,12 +111,10 @@ export default {
 <style scoped>
 /* temporary */
 
+
 .card__text {
   padding: 0px;
 }
 
-#search{
-  width: 600px;
-  height: 190px!important;
-}
+
 </style>

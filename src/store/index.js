@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import vuexCache from 'vuex-cache'
 import * as logements from '../../data/logements.1.json'
+import normalize from './utils.js'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    projects: [],
-    e7: '',
-    e6: '',
+    projects: {}, // normalized -by id
+    projectType: '',
+    projectArea: '',
     page: 1,
     size: 200,
     pageNumber: 0
@@ -17,7 +19,7 @@ const store = new Vuex.Store({
   plugins: [vuexCache],
   actions: {
     LOAD_PROJECT_LIST: function ({ commit }) {
-      commit('SET_PROJECT_LIST', {list: logements})
+      commit('SET_PROJECT_LIST', {list: normalize(logements)})
     }
   },
   /* The mutations calls are the only place that the store can be updated. */
@@ -26,12 +28,12 @@ const store = new Vuex.Store({
     SET_PROJECT_LIST: (state, { list }) => {
       state.projects = list
     },
-    updateE7: (state, e7) => {
-      state.e7 = e7
+    updateType: (state, projectType) => {
+      state.projectType = projectType
       state.page = 1
     },
-    updateE6: (state, e6) => {
-      state.e6 = e6
+    updateArea: (state, projectArea) => {
+      state.projectArea = projectArea
     },
     updatePage: (state, page) => {
       state.page = page
@@ -44,17 +46,13 @@ const store = new Vuex.Store({
 
   getters: {
     filteredProjects: state => {
-      console.count()
-      return state.projects.filter(project =>
-        state.e6 !== null
+      var deNormProj = Object.values(state.projects)
+      return deNormProj.filter(project =>
+        state.projectArea !== null
           ? project['Type_projet']
-            .includes(state.e7) && (project['Arrondissement'] || project['Nom_Villes_liées'])
-            .includes(state.e6) : project['Type_projet']
-            .includes(state.e7))
-    },
-
-    deDuped: state => {
-      return state.projects.reduce((x, y) => x.findIndex(e => e['Nom Projet'] === y['Nom Projet']) < 0 ? [...x, y] : x, [])
+            .includes(state.projectType) && (project['Arrondissement'] || project['Nom_Villes_liées'])
+            .includes(state.projectArea) : project['Type_projet']
+            .includes(state.projectType))
     },
     paginated: (state, filteredProjects) => {
       window.scroll({

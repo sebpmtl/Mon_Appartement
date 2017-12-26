@@ -26,13 +26,32 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
+      
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Mon Appartement</v-toolbar-title>
+      <v-layout>
+        <v-flex>
+      <v-toolbar-title class="display-1 main_title">Mon Appartement</v-toolbar-title>
+        </v-flex>
+      </v-layout>
+       <v-layout  row wrap justify-end>
+            <v-flex>
+              <v-select
+                
+                v-model="a1"
+                label="Recherche"
+                autocomplete
+                cache-items
+                clearable
+                item-text="Nom Projet"   
+              
+              ></v-select>
+            </v-flex>
+          </v-layout>
     </v-toolbar>
     <v-content>
       <v-container fluid>
         <v-layout justify-center row wrap>
-          <search-box></search-box>
+          <search-filters></search-filters>
          <router-view></router-view>
         </v-layout>
       </v-container>
@@ -47,22 +66,23 @@
 
 <script>
 import { mapState } from 'vuex'
-import SearchBox from '@/components/SearchBox'
+import SearchFilters from '@/components/SearchFilters'
 
 export default {
   name: 'app',
   components: {
 
-    SearchBox
+    SearchFilters
 
   },
   data: () => ({
-    drawer: false
+    drawer: false,
+    a1: ''
   }),
   props: {
     source: String
   },
-  mounted: function () {
+  created: function () {
     this.$store.cache.dispatch('LOAD_PROJECT_LIST')
   },
   computed: {
@@ -84,5 +104,11 @@ export default {
 </script>
    
 
+<style scoped>
 
+.main_title{
+  text-overflow: none;
+  overflow: visible;
+}
+</style>
 
